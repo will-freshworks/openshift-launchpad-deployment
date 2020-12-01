@@ -7,7 +7,12 @@ on:
       - main
 
 jobs:
-  checkEnv:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Target Branch
+        uses: actions/checkout@v1
+  check-env:
     name: Check and print env variables
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +21,6 @@ jobs:
           alias c=../scripts/checkenv.sh
           c NAMESPACE
           c DEPLOYMENT_NAME
-
   # Print variables for logging and debugging purposes
   # checkEnv:
   #   name: Check Env variables
