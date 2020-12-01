@@ -1,0 +1,27 @@
+# Must be applied to the tools namespace associated with this project to create the permissions
+# other namespaces require to access the resources in tools.
+---
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: tools-security-init
+labels:
+  deployment: ${DEPLOYMENT_NAME}
+objects:
+  - apiVersion: authorization.openshift.io/v1
+    kind: RoleBinding
+    metadata:
+      name: ${DEPLOYMENT_NAME}-${NAMESPACE}-image-puller
+    subjects:
+    - kind: Group
+      name: system:serviceaccounts:${NAMESPACE}
+    roleRef:
+      kind: Role
+      name: system:image-puller
+parameters:
+  - name: NAMESPACE
+    description: |
+      The the name of the namespace that will gain access to tools
+    required: true
+  - name: DEPLOYMENT_NAME
+    required: true
