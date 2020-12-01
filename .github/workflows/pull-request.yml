@@ -16,7 +16,6 @@ jobs:
           alias c=../scripts/checkenv.sh
           c NAMESPACE
           c DEPLOYMENT_NAME
-
   # Print variables for logging and debugging purposes
   # checkEnv:
   #   name: Check Env variables
